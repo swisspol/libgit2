@@ -1092,7 +1092,7 @@ int git_config_find_local(git_repository *repo, git_buf *path)
 	assert(repo);
 
 	git_buf_sanitize(path);
-	if (git_buf_joinpath(path, repo->path_repository, GIT_CONFIG_FILENAME_INREPO) < 0)
+	if (git_buf_joinpath(path, repo->gitdir, GIT_CONFIG_FILENAME_INREPO) < 0)
     return -1;
 
 	if (!git_path_exists(path->ptr)) {
