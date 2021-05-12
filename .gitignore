@@ -5,3 +5,6 @@ build/
 tags
 CMakeSettings.json
 .vs
+
+#swisspol (GitUp)
+xcode
