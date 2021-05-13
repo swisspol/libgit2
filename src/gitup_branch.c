@@ -51,3 +51,32 @@ cleanup:
 	return error;
 }
 
+/// Actually, you have to use `git_branch_upstream_name`.
+/// This method is dup of method `retrieve_upstream_configuration` in `branch.c`
+static int gitup_retrieve_upstream_configuration(
+	git_buf *out,
+	const git_config *config,
+	const char *canonical_branch_name,
+	const char *format)
+{
+	git_buf buf = GIT_BUF_INIT;
+	int error;
+
+	if (git_buf_printf(&buf, format,
+		canonical_branch_name + strlen(GIT_REFS_HEADS_DIR)) < 0)
+			return -1;
+
+	error = git_config_get_string_buf(out, config, git_buf_cstr(&buf));
+	git_buf_dispose(&buf);
+	return error;
+}
+
+int gitup_branch_upstream_remote(git_buf *buf, git_repository *repo, const char *refname)
+{
+	return gitup_retrieve_upstream_configuration(buf, repo, refname, "branch.%s.remote");
+}
+
+int gitup_branch_upstream_merge(git_buf *buf, git_repository *repo, const char *refname)
+{
+	return gitup_retrieve_upstream_configuration(buf, repo, refname, "branch.%s.merge");
+}

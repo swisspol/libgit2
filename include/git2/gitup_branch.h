@@ -16,5 +16,10 @@ GIT_EXTERN(int) gitup_branch_upstream_name_from_merge_remote_names(git_buf *out,
 /// Use this method.
 GIT_EXTERN(int) gitup_branch_upstream_name(git_buf *out, git_repository *repo, const char *refname);
 
+// PATCH
+/// These methods could be (?) replaced by `gitup_branch_upstream_name` also.
+GIT_EXTERN(int) gitup_branch_upstream_remote(git_buf *buf, git_repository *repo, const char *refname);
+GIT_EXTERN(int) gitup_branch_upstream_merge(git_buf *buf, git_repository *repo, const char *refname);
+
 /** @} */
 GIT_END_DECL
