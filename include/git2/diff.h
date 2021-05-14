@@ -264,6 +264,10 @@ typedef struct {
 	uint32_t           flags;
 	uint16_t           mode;
 	uint16_t           id_abbrev;
+
+	/// PATCH
+	git_time_t         ctime;
+	git_time_t         mtime;
 } git_diff_file;
 
 /**
