@@ -210,7 +210,7 @@ ENDIF()
 
 # Optional external dependency: libssh2
 IF (USE_SSH)
-	FIND_PKGLIBRARIES(LIBSSH2 libssh2)
+	FIND_PACKAGE(LIBSSH2)
 ENDIF()
 IF (LIBSSH2_FOUND)
 	SET(GIT_SSH 1)
