@@ -5,3 +5,4 @@
 #include "git2/gitup_config.h"
 #include "git2/gitup_branch.h"
 #include "git2/gitup_clone.h"
+#include "git2/gitup_repository.h"
