@@ -74,6 +74,7 @@ static int socket_connect(git_stream *stream)
 	struct addrinfo *info = NULL, *p;
 	struct addrinfo hints;
 	git_socket_stream *st = (git_socket_stream *) stream;
+    struct timeval tv; /// PATCH
 	GIT_SOCKET s = INVALID_SOCKET;
 	int ret;
 
@@ -127,7 +128,6 @@ static int socket_connect(git_stream *stream)
 
 	/// PATCH
 	/* Configure a 30 seconds timeout for recv() and send() on the socket */
-	struct timeval tv;
 	tv.tv_sec = 30;
 	tv.tv_usec = 0;
 	if (setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) < 0) {
