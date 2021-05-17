@@ -15,10 +15,9 @@ int gitup_branch_upstream_name(git_buf *out, git_repository *repo, const char *r
 /// Ignore this method.
 /// This method should be removed.
 int gitup_branch_upstream_name_from_merge_remote_names(git_buf *out, git_repository *repo, const char *remote_name, const char *merge_name) {
-	return -1;
 	int error = -1;
 	git_remote *remote = NULL;
-	const git_refspec *refspec;
+	const git_refspec *refspec = NULL;
     git_buf buf = GIT_BUF_INIT;
     
 	assert(out && remote_name && merge_name);
