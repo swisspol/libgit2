@@ -39,14 +39,16 @@ GIT_EXTERN(int) gitup_clone_into_old(
 	const git_fetch_options *fetch_opts,
 	const git_checkout_options *checkout_opts,
 	const char *branch) {
+	git_clone_options options = GIT_CLONE_OPTIONS_INIT;
+	const char *url;
+	const char *local_path;
 	/// We have to create git_clone_options
 	assert(repo && remote && fetch_opts && checkout_opts);
-	git_clone_options *options = GIT_CLONE_OPTIONS_INIT;
 
-	options.checkout_opts = checkout_opts;
-	options.fetch_opts = fetch_options;
+	options.checkout_opts = *checkout_opts;
+	options.fetch_opts = *fetch_opts;
 	options.checkout_branch = branch;
-	const char *url = git_remote_url(remote);
-	const char *local_path = git_repository_path(repo);
-	return gitup_clone_into(&repo, url, local_path, options);
+	url = git_remote_url(remote);
+	local_path = git_repository_path(repo);
+	return gitup_clone_into(&repo, url, local_path, &options);
 }
