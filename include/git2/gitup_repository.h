@@ -16,7 +16,7 @@ GIT_BEGIN_DECL
 /**
  * Update or rewrite the gitlink in the workdir
  */
-GIT_EXTERN(int) git_repository_update_gitlink(
+GIT_EXTERN(int) gitup_repository_update_gitlink(
     git_repository *repo, int use_relative_path);
 
 /** @} */

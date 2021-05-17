@@ -40,7 +40,7 @@
 # include "win32/w32_util.h"
 #endif
 
-int git_repository_update_gitlink(
+int gitup_repository_update_gitlink(
 	git_repository *repo,
 	int use_relative_path)
 {
