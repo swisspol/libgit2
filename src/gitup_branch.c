@@ -12,17 +12,18 @@
 #include "git2/branch.h"
 
 int gitup_branch_upstream_name(git_buf *out, git_repository *repo, const char *refname) {
-	git_branch_upstream_name(out, repo, refname);
+	return git_branch_upstream_name(out, repo, refname);
 }
 
 /// Ignore this method.
+/// This method should be removed.
 int gitup_branch_upstream_name_from_merge_remote_names(git_buf *out, git_repository *repo, const char *remote_name, const char *merge_name) {
 	return -1;
-	git_buf buf = GIT_BUF_INIT;
 	int error = -1;
 	git_remote *remote = NULL;
 	const git_refspec *refspec;
-
+    git_buf buf = GIT_BUF_INIT;
+    
 	assert(out && remote_name && merge_name);
 
 	git_buf_sanitize(out);
@@ -71,12 +72,21 @@ static int gitup_retrieve_upstream_configuration(
 	return error;
 }
 
+static int gitup_branch_upstream_format(git_buf *buf, git_repository *repo, const char *refname, const char *format) {
+    int error;
+    git_config *config;
+    if ((error = git_repository_config_snapshot(&config, repo)) < 0)
+        return error;
+    return gitup_retrieve_upstream_configuration(buf, config, refname, format);
+}
+
+/// May be in PR.
 int gitup_branch_upstream_remote(git_buf *buf, git_repository *repo, const char *refname)
 {
-	return gitup_retrieve_upstream_configuration(buf, repo, refname, "branch.%s.remote");
+	return gitup_branch_upstream_format(buf, repo, refname, "branch.%s.remote");
 }
 
 int gitup_branch_upstream_merge(git_buf *buf, git_repository *repo, const char *refname)
 {
-	return gitup_retrieve_upstream_configuration(buf, repo, refname, "branch.%s.merge");
+	return gitup_branch_upstream_format(buf, repo, refname, "branch.%s.merge");
 }
