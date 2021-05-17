@@ -10,17 +10,12 @@
 #include "git2/clone.h"
 #include "git2/remote.h"
 #include "git2/repository.h"
-#include "git2/revparse.h"
-#include "git2/branch.h"
 #include "git2/config.h"
 #include "git2/checkout.h"
-#include "git2/commit.h"
-#include "git2/tree.h"
 
 #include "remote.h"
 #include "futils.h"
 #include "refs.h"
-#include "path.h"
 #include "repository.h"
 #include "odb.h"
 

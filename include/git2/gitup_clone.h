@@ -6,7 +6,6 @@
 #include "remote.h"
 #include "transport.h"
 
-
 /**
  * @file git2/clone.h
  * @brief Git cloning routines

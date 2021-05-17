@@ -1,15 +1,12 @@
 #include "branch.h"
 
 #include "commit.h"
-#include "tag.h"
 #include "config.h"
-#include "refspec.h"
 #include "refs.h"
 #include "remote.h"
-#include "annotated_commit.h"
-#include "worktree.h"
 
 #include "git2/branch.h"
+#include "git2/gitup_branch.h"
 
 int gitup_branch_upstream_name(git_buf *out, git_repository *repo, const char *refname) {
 	return git_branch_upstream_name(out, repo, refname);

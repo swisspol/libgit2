@@ -1,22 +1,14 @@
 #include "refs.h"
-
-#include "hash.h"
+#include "git2/refs.h"
+#include "git2/gitup_refs.h"
 #include "repository.h"
-#include "futils.h"
 #include "filebuf.h"
 #include "pack.h"
 #include "reflog.h"
 #include "refdb.h"
 
-#include <git2/tag.h>
-#include <git2/object.h>
 #include <git2/oid.h>
-#include <git2/branch.h>
-#include <git2/refs.h>
-#include <git2/refdb.h>
 #include <git2/sys/refs.h>
-#include <git2/signature.h>
-#include <git2/commit.h>
 
 int gitup_reference_create_virtual(
 	git_reference **ref_out,

@@ -1,19 +1,7 @@
 #include "config.h"
-
 #include "git2/config.h"
-#include "git2/sys/config.h"
-
-#include "buf_text.h"
-#include "config_backend.h"
-#include "regexp.h"
-#include "sysdir.h"
-#include "transaction.h"
+#include "git2/gitup_config.h"
 #include "vector.h"
-#if GIT_WIN32
-# include <windows.h>
-#endif
-
-#include <ctype.h>
 
 int gitup_config_find_local(git_repository *repo, git_buf *path)
 {

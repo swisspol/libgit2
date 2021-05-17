@@ -1,6 +1,7 @@
 #include "common.h"
 #include "oid.h"
 #include "types.h"
+#include "branch.h"
 
 /**
  * @file git2/branch.h

@@ -5,40 +5,16 @@
  * a Linking Exception. For full terms see the included COPYING file.
  */
 
-#include "git2/gitup_repository.h"
-#include "git2/repository.h"
 #include "repository.h"
+#include "git2/repository.h"
+#include "git2/gitup_repository.h"
 
-#include <ctype.h>
-
-#include "git2/object.h"
-#include "git2/sys/repository.h"
-
-#include "common.h"
-#include "commit.h"
-#include "tag.h"
-#include "blob.h"
 #include "futils.h"
-#include "sysdir.h"
-#include "filebuf.h"
 #include "index.h"
 #include "config.h"
-#include "refs.h"
-#include "filter.h"
 #include "odb.h"
 #include "refdb.h"
-#include "remote.h"
-#include "merge.h"
 #include "diff_driver.h"
-#include "annotated_commit.h"
-#include "submodule.h"
-#include "worktree.h"
-
-#include "strmap.h"
-
-#ifdef GIT_WIN32
-# include "win32/w32_util.h"
-#endif
 
 int gitup_repository_update_gitlink(
 	git_repository *repo,
