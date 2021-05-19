@@ -75,5 +75,5 @@ int gitup_reference_symbolic_create_virtual(
 {
 	int force = false;
 	const char *log_message = "";
-	return git_reference_symbolic_create(ref_out, repo, name, target, int force, log_message);
+	return git_reference_symbolic_create(ref_out, repo, name, target, force, log_message);
 }
