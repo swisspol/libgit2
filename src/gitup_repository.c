@@ -32,3 +32,8 @@ int gitup_repository_update_gitlink(
 
 	return 0;
 }
+
+GIT_EXTERN(int) gitup_repository_local_config_path(git_buf *out, git_repository *repo)
+{
+    return git_repository_item_path(out, repo, GIT_REPOSITORY_ITEM_CONFIG);
+}
