@@ -5,7 +5,7 @@ SCRIPT_DIRECTORY=$(dirname $0)
 rm -rf "$SCRIPT_DIRECTORY/xcode"
 mkdir "$SCRIPT_DIRECTORY/xcode"
 
-MACOSX_DEPLOYMENT_TARGET=10.10 cmake -S "$SCRIPT_DIRECTORY" -B "$SCRIPT_DIRECTORY/xcode" -G "Xcode"
+MACOSX_DEPLOYMENT_TARGET=10.13 cmake -S "$SCRIPT_DIRECTORY" -B "$SCRIPT_DIRECTORY/xcode" -G "Xcode"
 
 # We should copy a features.h file
 # from ./xcode/src/git2/sys/features.h
