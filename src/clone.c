@@ -551,6 +551,17 @@ int git_clone_options_init(git_clone_options *opts, unsigned int version)
 	return 0;
 }
 
+int gitup_clone_into(
+    git_repository *repo,
+    git_remote *remote,
+    const git_fetch_options *fetch_opts,
+    const git_checkout_options *checkout_opts,
+    const char *branch)
+{
+    assert(repo && remote && fetch_opts && checkout_opts);
+    return clone_into(repo, remote, fetch_opts, checkout_opts, branch);
+}
+
 #ifndef GIT_DEPRECATE_HARD
 int git_clone_init_options(git_clone_options *opts, unsigned int version)
 {
