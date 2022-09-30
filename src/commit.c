@@ -183,6 +183,35 @@ cleanup:
 	return error;
 }
 
+/// Make git commit buffer similar to `git_commit__create_internal`
+/// but without write operation, `id` and `update_ref` arguments.
+int git_commit_create_buffer_for_parents_cb(
+	git_buf* out,
+	git_repository *repo,
+	const git_signature *author,
+	const git_signature *committer,
+	const char *message_encoding,
+	const char *message,
+	const git_oid *tree,
+	git_commit_parent_callback parent_cb,
+	void *parent_payload,
+	bool validate)
+ {
+	int error;
+	git_array_oid_t parents = GIT_ARRAY_INIT;
+
+	if ((error = validate_tree_and_parents(&parents, repo, tree, parent_cb, parent_payload, NULL, validate)) < 0)
+	goto cleanup;
+
+	GIT_BUF_WRAP_PRIVATE(out, git_commit__create_buffer_internal, author, committer,
+						 message_encoding, message, tree,
+						 &parents);
+
+ cleanup:
+	git_array_clear(parents);
+	return error;
+ }
+
 int git_commit_create_from_callback(
 	git_oid *id,
 	git_repository *repo,
