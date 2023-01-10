@@ -120,9 +120,10 @@ int git_revwalk_hide(git_revwalk *walk, const git_oid *oid)
 int git_revwalk__push_ref(git_revwalk *walk, const char *refname, const git_revwalk__push_options *opts)
 {
 	git_oid oid;
-
-	if (git_reference_name_to_id(&oid, walk->repo, refname) < 0)
-		return -1;
+	int error;
+	
+	if ((error = git_reference_name_to_id(&oid, walk->repo, refname)) < 0)
+		return error;
 
 	return git_revwalk__push_commit(walk, &oid, opts);
 }
@@ -161,6 +162,9 @@ int git_revwalk__push_glob(git_revwalk *walk, const char *glob, const git_revwal
 	while ((error = git_reference_next(&ref, iter)) == 0) {
 		error = git_revwalk__push_ref(walk, git_reference_name(ref), &opts);
 		git_reference_free(ref);
+		if (error == GIT_ENOTFOUND) {
+			continue;
+		}
 		if (error < 0)
 			break;
 	}
