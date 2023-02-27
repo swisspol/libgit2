@@ -10,6 +10,7 @@
 #include "git2/common.h"
 #include "git2/types.h"
 #include "git2/oid.h"
+#include <stdbool.h>
 
 /**
  * @file git2/sys/commit.h
@@ -74,6 +75,18 @@ GIT_EXTERN(int) git_commit_create_from_callback(
 	const git_oid *tree,
 	git_commit_parent_callback parent_cb,
 	void *parent_payload);
+
+GIT_EXTERN(int) git_commit_create_buffer_for_parents_cb(
+	git_buf* out,
+	git_repository *repo,
+	const git_signature *author,
+	const git_signature *committer,
+	const char *message_encoding,
+	const char *message,
+	const git_oid *tree,
+	git_commit_parent_callback parent_cb,
+	void *parent_payload,
+	bool validate);
 
 /** @} */
 GIT_END_DECL
